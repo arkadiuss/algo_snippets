@@ -1,33 +1,3 @@
-#include<bits/stdc++.h>
-#define VAR(i,n) __typeof(n) i = (n)
-#define loop(i,j,s) for(int i=j;i<s;i++)
-#define loopback(i,j,s) for(int i=j;i>=s;i--)
-#define foreach(i,c) for(VAR(i,(c).begin());i!=(c).end();i++)
-#define pln( x ) cout << x << "\n"
-#define ps( x ) cout << x << " "
-#define entr cout << "\n" 
-#define pcnt(i) __builtin_popcount(i)
-#define ll long long
-#define pb push_back
-#define mp make_pair
-#define ff first
-#define ss second
-#define SIZE(c) (c).size()
-#define ALL(c) (c).begin(), (c).end()
-using namespace std;
-typedef vector<int> VI;
-typedef vector<vector<int>> VVI; 
-const int INFTY=20000000;
-const int MAX=500100;
-const int MOD=10000000;
-
-void coutTab(int* tab,int n){
-	loop(i,0,n){
-		cout<<tab[i]<<" ";
-	}
-	cout<<"\n";
-}
-//------------------------------------------
 class TEdge { 
 	public:
 		int v;
@@ -116,16 +86,6 @@ vector<CTNode> decompose(vector<TNode> &T) {
 	return CT;
 }
 
-void printCT(vector<CTNode> &CT){
-	loop(i,0,CT.size()){
-		ps(i+1);ps(":");
-		for(int e: CT[i].chl) {
-			ps(e+1);
-		}
-		entr;
-	}
-}
-
 void count_anc(vector<TNode> &T, int v, int l){
 	T[v].anc.pb(l);
 	int i = 0;
@@ -154,16 +114,6 @@ void preorder(vector<TNode> &T, int v, int l){
 	T[v].post = pre;
 }
 
-void print_anc(vector<TNode> &T){
-	for(TNode t: T){
-		ps(t.i);ps(t.pre);ps(t.post);ps(t.subtree_size);ps(t.d);ps(":");
-		for(int a: t.anc){
-			ps(a);
-		}
-		entr;
-	}
-}
-
 bool in_subtree(vector<TNode> &T, int v, int u){
 	return T[u].pre <= T[v].pre && T[u].post > T[v].pre;
 }
@@ -185,26 +135,4 @@ int lca(vector<TNode> &T, int u, int v) {
 
 int dist(vector<TNode> &T, int u, int v) {
 	return T[u].d + T[v].d - 2*T[lca(T,u,v)].d;
-}
-
-int main(){
-	ios_base::sync_with_stdio(0);
-	int m;
-	cin>>n>>m;
-	loop(i,0,n){
-		tree.pb(TNode(i, i != 0));
-	}
-	int a,b;
-	loop(i,0,n-1){
-		cin>>a>>b;
-		tree[a-1].ngh.pb(TEdge(b-1));
-		tree[b-1].ngh.pb(TEdge(a-1));
-	}
-	vector<CTNode> CT = decompose(tree);
-	printCT(CT); 
-	count_anc(tree, 0, 0);
-	preorder(tree, 0, -1);
-	count_subtrees_size(tree, 0, -1);
-	print_anc(tree);
-	pln(dist(tree, 6, 10));	
 }
