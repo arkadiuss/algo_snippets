@@ -11,13 +11,21 @@
 
 using namespace std;
 
-typedef ll long long;
+typedef long long ll;
 typedef vector<ll> vi;
 typedef vector<vi> vvi;
 typedef pair<ll, ll> pii;
 
 //------------------------------------------
+void solve() {
+
+}
+
 int main(){
 	ios_base::sync_with_stdio(0);
-
+	int T = 1;
+	// cin>>T;
+	while(T--) {
+		solve();
+	}
 }
